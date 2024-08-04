@@ -95,7 +95,18 @@ export const login = async (req, res) => {
       return res.status(400).send({ message: 'Incorrect password' });
     }
 
-    res.status(200).send({ message: 'Login successful', user });
+    const userData = {
+      id: user._id,
+      FirstName: user.FirstName,
+      LastName: user.LastName,
+      Username: user.Username,
+      Email: user.Email,
+      Country: user.Country,
+      role: user.role,
+      created_at: user.created_at,
+    };
+
+    res.status(200).send({ user: userData });
   } catch (e) {
     res.status(500).send({ error: e.message });
   }
